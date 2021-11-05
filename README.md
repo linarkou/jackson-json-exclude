@@ -11,7 +11,7 @@ Usage is also quite similar to `@JsonView`, see below.
 Add maven dependency:
 ```xml
 <dependency>
-   <groupId>com.github.linarkou</groupId>
+   <groupId>io.github.linarkou</groupId>
    <artifactId>jackson-json-exclude</artifactId>
    <version>1.0</version>
 </dependency>

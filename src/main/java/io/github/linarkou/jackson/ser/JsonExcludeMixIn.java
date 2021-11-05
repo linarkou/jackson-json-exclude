@@ -1,4 +1,4 @@
-package com.github.linarkou.jackson;
+package io.github.linarkou.jackson.ser;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 

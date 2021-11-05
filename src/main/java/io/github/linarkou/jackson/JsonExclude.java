@@ -1,4 +1,4 @@
-package com.github.linarkou.jackson;
+package io.github.linarkou.jackson;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

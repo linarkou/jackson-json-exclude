@@ -1,8 +1,9 @@
-package com.github.linarkou.jackson;
+package io.github.linarkou.jackson.ser;
 
 import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
 import com.fasterxml.jackson.databind.ser.PropertyWriter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import io.github.linarkou.jackson.JsonExclude;
 
 import java.util.Collection;
 import java.util.HashSet;

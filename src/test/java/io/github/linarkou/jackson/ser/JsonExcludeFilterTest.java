@@ -1,9 +1,15 @@
-package com.github.linarkou.jackson;
+package io.github.linarkou.jackson.ser;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.linarkou.jackson.JsonExclude;
+import io.github.linarkou.jackson.ser.JsonExcludeFilter;
+import io.github.linarkou.jackson.ser.JsonExcludeFilterProvider;
+import io.github.linarkou.jackson.ser.JsonExcludeMixIn;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.matchers.JsonPathMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
