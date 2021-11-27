@@ -25,12 +25,18 @@ public class TestBootApplication {
 
     @Bean
     public ObjectMapper objectMapper() {
-        return new ObjectMapper().addMixIn(Object.class, JsonExcludeMixIn.class);
+        return new ObjectMapper().addMixIn(Object.class, JsonExcludeMixIn.class)
+                .setFilterProvider(new JsonExcludeFilterProvider());
+    }
+
+    @GetMapping(value = "/with-password", produces = MediaType.APPLICATION_JSON_VALUE)
+    public User get() {
+        return new User("Bob", "q12345678");
     }
 
     @JsonExclude(ExcludePassword.class)
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public User get() {
+    @GetMapping(value = "/without-password", produces = MediaType.APPLICATION_JSON_VALUE)
+    public User getWithoutPassword() {
         return new User("Bob", "q12345678");
     }
 }

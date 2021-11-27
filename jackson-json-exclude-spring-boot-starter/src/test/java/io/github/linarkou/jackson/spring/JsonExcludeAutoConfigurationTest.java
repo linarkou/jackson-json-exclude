@@ -15,8 +15,16 @@ class JsonExcludeAutoConfigurationTest {
     MockMvc mockMvc;
 
     @Test
-    void name() throws Exception {
-        mockMvc.perform(get("/"))
+    void getWithPassword() throws Exception {
+        mockMvc.perform(get("/with-password"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.username").value("Bob"))
+                .andExpect(jsonPath("$.password").value("q12345678"));
+    }
+
+    @Test
+    void getWithoutPassword() throws Exception {
+        mockMvc.perform(get("/without-password"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.username").value("Bob"))
                 .andExpect(jsonPath("$.password").doesNotExist());
