@@ -19,14 +19,14 @@ Add maven dependency:
 
 ### Data model
 
-1. Create some marker interface, e.g. `interface SomeMarker { }`
-2. Add `@JsonExclude(SomeMarker.class)` over the field to be excluded
+1. Create some marker interface, e.g. `interface ExcludePassword { }`
+2. Add `@JsonExclude(ExcludePassword.class)` over the field to be excluded
 
     ```java
-    @Data
+    @Data @AllArgsConstructor @NoArgsConstructor
     class User {
         private String username;
-        @JsonExclude(SomeMarker.class)
+        @JsonExclude(ExcludePassword.class)
         private String password;
     }
     ```
@@ -44,7 +44,34 @@ Add maven dependency:
 2. Create and use filter for serialization
 
     ```java
-    JsonExcludeFilter filter = new JsonExcludeFilter(SomeMarker.class);
-    String result = mapper.writer(new JsonExcludeFilterProvider(filter))
+    User user = new User("Bob", "q12345678");
+    String result = mapper.writer(new JsonExcludeFilterProvider(ExcludePassword.class))
             .writeValueAsString(someObject);
+    // result = {"username": "Bob"} (without password)
     ```
+
+### Spring MVC Controller
+
+There is an ability to put `@JsonExclude` annotation on a Spring MVC `@RequestMapping`
+ or `@ExceptionHandler` method.
+
+Just add maven dependency:
+```xml
+<dependency>
+   <groupId>io.github.linarkou</groupId>
+   <artifactId>jackson-json-exclude-spring-boot-starter</artifactId>
+   <version>1.0</version>
+</dependency>
+```
+
+Then use it like in here:
+```java
+@JsonExclude(ExcludePassword.class)
+@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+public User getWithoutPassword() {
+    return new User("Bob", "q12345678");
+}
+// will return {"username": "Bob"} (without password)
+```
+
+Full working example can be found [here](./jackson-json-exclude-spring-boot-starter/src/test/java/io/github/linarkou/jackson/spring/TestBootApplication.java)
